@@ -10,18 +10,18 @@ In my tests all participants were located in Czech Republic (client and server).
 
 #### GET /
 
-| Lang    | Requests | Average time   |
-|---------|----------|----------------|
-| Node.js | 10000    | ~17.1979748 ms |
-| Go      | 10000    | ~18.3700849 ms |
+| # | Lang    | Requests | Average time   |
+|---|---------|----------|----------------|
+| 1 | Node.js | 10000    | ~17.1979748 ms |
+| 2 | Go      | 10000    | ~18.3700849 ms |
 
 
 #### POST /
 
-| Lang    | Requests | Average time   |
-|---------|----------|----------------|
-| Node.js | 1000     | ~18.5389170 ms |
-| Go      | 1000     | ~16.2108910 ms |
+| # | Lang    | Requests | Average time   |
+|---|---------|----------|----------------|
+| 1 | Go      | 1000     | ~16.2108910 ms |
+| 2 | Node.js | 1000     | ~18.5389170 ms |
 
 ## Installation
 
