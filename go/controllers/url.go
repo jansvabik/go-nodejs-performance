@@ -3,23 +3,31 @@ package controllers
 import (
 	"net/http"
 
+	"github.com/gorilla/mux"
 	"github.com/jansvabik/go-nodejs-performance/go/data"
 )
 
-// GetList gets all orders from database and sends it to client
+// GetList gets all URLs from database and sends it to client
 func GetList(w http.ResponseWriter, r *http.Request) {
-	orders, err := data.GetList()
+	URLs, err := data.GetList()
 	if err != nil {
 		writeErrorResponse(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	writeOkResponse(w, "Full URL list successfully retrieved.", orders)
+	writeOkResponse(w, "Full URL list successfully retrieved.", URLs)
 }
 
 // Redir does the redirect to the shortened URL target
 func Redir(w http.ResponseWriter, r *http.Request) {
-	writeErrorResponse(w, "Not implemented yet", http.StatusInternalServerError)
+	URLID := mux.Vars(r)["url"]
+	URL, err := data.GetByURL(URLID)
+	if err != nil {
+		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
+		return
+	}
+
+	http.Redirect(w, r, URL.Target, http.StatusTemporaryRedirect)
 }
 
 // Create creates new document and saves it in database

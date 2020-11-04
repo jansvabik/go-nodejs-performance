@@ -25,27 +25,25 @@ type URL struct {
 
 // GetList gets all URLs from database and returns it
 func GetList() ([]URL, error) {
-	URLs := []URL{}
-
 	// create timeout context
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	// try to find the data
-	p := bson.M{
+	URLs := []URL{}
+	cursor, err := collection().Find(ctx, bson.M{}, options.Find().SetProjection(bson.M{
 		"_id":     0,
 		"url":     1,
 		"target":  1,
 		"used":    1,
 		"lastUse": 1,
-	}
-	cursor, err := collection().Find(ctx, bson.M{}, options.Find().SetProjection(p))
+	}))
 	defer cursor.Close(ctx)
 	if err != nil {
 		return URLs, err
 	}
 
-	// create and array of URLs
+	// create an array of URLs
 	for cursor.Next(ctx) {
 		var url URL
 		cursor.Decode(&url)
@@ -53,6 +51,39 @@ func GetList() ([]URL, error) {
 	}
 
 	return URLs, err
+}
+
+// GetByURL returns data about one specific URL
+func GetByURL(URLID string) (*URL, error) {
+	// create timeout context
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	// try to get data from database
+	var result URL
+	err := collection().FindOne(ctx, bson.M{
+		"url": URLID,
+	}).Decode(&result)
+	if err != nil {
+		return nil, err
+	}
+
+	return &result, nil
+}
+
+// Create creates new document of URL
+func Create() {
+
+}
+
+// Update updates existing document
+func Update() {
+
+}
+
+// Delete deletes specified document permanently
+func Delete() {
+
 }
 
 // collection returns the set connection
