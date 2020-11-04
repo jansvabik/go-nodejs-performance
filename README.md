@@ -7,10 +7,21 @@ Hello! This is my project for testing Go vs. Node.js REST API performance. This 
 In my tests all participants were located in Czech Republic (client and server). Tests were done macOS/localhost and on Debian 10 Buster/Nginx 1.14.
 
 ### Localhost on macOS
-    Results from [GET /]
-    --------------------
-    Node.js    10000x    ~17.1979748 ms
-    Go         10000x    ~18.3700849 ms
+
+#### GET /
+
+| Lang    | Requests | Average time   |
+|---------|----------|----------------|
+| Node.js | 10000    | ~17.1979748 ms |
+| Go      | 10000    | ~18.3700849 ms |
+
+
+#### POST /
+
+| Lang    | Requests | Average time   |
+|---------|----------|----------------|
+| Node.js | 1000     | ~18.5389170 ms |
+| Go      | 1000     | ~16.2108910 ms |
 
 ## Installation
 
