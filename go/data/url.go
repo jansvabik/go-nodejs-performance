@@ -23,8 +23,8 @@ type URL struct {
 	Password string              `json:"password,omitempty" bson:"password"`
 }
 
-// GetURLs gets all URLs from database and returns it
-func GetURLs() ([]URL, error) {
+// GetList gets all URLs from database and returns it
+func GetList() ([]URL, error) {
 	URLs := []URL{}
 
 	// create timeout context

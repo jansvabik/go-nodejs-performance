@@ -7,6 +7,10 @@ import (
 
 // SetUpURLs sets up routes for url resource
 func SetUpURLs(router *mux.Router) *mux.Router {
-	router.HandleFunc("/", controllers.GetURLs).Methods("GET")
+	router.HandleFunc("/", controllers.GetList).Methods("GET")
+	router.HandleFunc("/{url}/", controllers.Redir).Methods("GET")
+	router.HandleFunc("/", controllers.Create).Methods("POST")
+	router.HandleFunc("/{url}/", controllers.Update).Methods("UPDATE")
+	router.HandleFunc("/{url}/", controllers.Delete).Methods("DELETE")
 	return router
 }
