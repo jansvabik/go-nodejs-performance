@@ -55,16 +55,23 @@ func GetList() ([]URL, error) {
 	return URLs, err
 }
 
-// GetByURL returns data about one specific URL
-func GetByURL(URLID string) (*URL, error) {
+// Use returns data about one specific URL
+func Use(URLID string) (*URL, error) {
 	// create timeout context
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	// try to get data from database
 	var result URL
-	err := collection().FindOne(ctx, bson.M{
+	err := collection().FindOneAndUpdate(ctx, bson.M{
 		"url": URLID,
+	}, bson.M{
+		"$inc": bson.M{
+			"used": 1,
+		},
+		"$set": bson.M{
+			"lastUse": time.Now(),
+		},
 	}).Decode(&result)
 	if err != nil {
 		return nil, err

@@ -22,13 +22,13 @@ func GetList(w http.ResponseWriter, r *http.Request) {
 // Redir does the redirect to the shortened URL target
 func Redir(w http.ResponseWriter, r *http.Request) {
 	URLID := mux.Vars(r)["url"]
-	URL, err := data.GetByURL(URLID)
+	URL, err := data.Use(URLID)
 	if err != nil {
 		http.Redirect(w, r, "/", http.StatusTemporaryRedirect)
 		return
 	}
 
-	http.Redirect(w, r, URL.Target, http.StatusPermanentRedirect)
+	http.Redirect(w, r, URL.Target, http.StatusTemporaryRedirect)
 }
 
 // Create creates new document and saves it in database
