@@ -10,32 +10,32 @@ In my tests all participants were located in Czech Republic (client and server).
 
 #### GET / (few records)
 
-| # | Lang    | Requests | Average time   |
-|---|---------|----------|----------------|
-| 1 | Node.js | 10000    | ~17.1979748 ms |
-| 2 | Go      | 10000    | ~18.3700849 ms |
+| # | Lang    | Requests | Average time   | Saved |
+|---|---------|----------|----------------|-------|
+| 1 | Node.js | 10000    | ~17.1979748 ms | 6.38% |
+| 2 | Go      | 10000    | ~18.3700849 ms | 0%    |
 
 #### GET / (20k records at once)
 
-| # | Lang    | Requests | Average time    |
-|---|---------|----------|-----------------|
-| 1 | Go      | 10000    | ~134.1045839 ms |
-| 2 | Node.js | 10000    | ~385.3674946 ms |
+| # | Lang    | Requests | Average time    | Saved |
+|---|---------|----------|-----------------|-------|
+| 1 | Go      | 10000    | ~134.1045839 ms | 65.2% |
+| 2 | Node.js | 10000    | ~385.3674946 ms | 0%    |
 
 
 #### POST /
 
-| # | Lang    | Requests | Average time   |
-|---|---------|----------|----------------|
-| 1 | Go      | 10000    | ~16.5671425 ms |
-| 2 | Node.js | 10000    | ~17.1951589 ms |
+| # | Lang    | Requests | Average time   | Saved |
+|---|---------|----------|----------------|-------|
+| 1 | Go      | 10000    | ~16.5671425 ms | 3.65% |
+| 2 | Node.js | 10000    | ~17.1951589 ms | 0%    |
 
 #### DELETE /{url}/
 
-| # | Lang    | Requests | Average time   |
-|---|---------|----------|----------------|
-| 1 | Go      | 1000     | ~16.8426170 ms |
-| 2 | Node.js | 1000     | ~17.2534320 ms |
+| # | Lang    | Requests | Average time   | Saved |
+|---|---------|----------|----------------|-------|
+| 1 | Go      | 1000     | ~16.8426170 ms | 2.38% |
+| 2 | Node.js | 1000     | ~17.2534320 ms | 0%    |
 
 ## Installation
 
