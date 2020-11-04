@@ -23,6 +23,13 @@ In my tests all participants were located in Czech Republic (client and server).
 | 1 | Go      | 1000     | ~16.2108910 ms |
 | 2 | Node.js | 1000     | ~18.5389170 ms |
 
+#### DELETE /{url}/
+
+| # | Lang    | Requests | Average time   |
+|---|---------|----------|----------------|
+| 1 | Go      | 1000     | ~16.7530640 ms |
+| 2 | Node.js | 1000     | ~18.6144160 ms |
+
 ## Installation
 
 You should have already prepared server for deployment with some kind of web server like [Nginx](https://www.nginx.com/) or [Apache](https://httpd.apache.org/).
