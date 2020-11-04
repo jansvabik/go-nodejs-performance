@@ -4,6 +4,8 @@ import (
 	"context"
 	"time"
 
+	"github.com/jansvabik/go-nodejs-performance/go/random"
+
 	"github.com/jansvabik/go-nodejs-performance/go/app"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
@@ -72,8 +74,29 @@ func GetByURL(URLID string) (*URL, error) {
 }
 
 // Create creates new document of URL
-func Create() {
+func Create(target string) (*URL, error) {
+	t := time.Now()
+	doc := URL{
+		URL:      random.String(6),
+		Target:   target,
+		Used:     0,
+		LastUse:  nil,
+		Created:  &t,
+		Modified: &t,
+		Password: random.String(32),
+	}
 
+	// create timeout context
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	// try to store the document in db
+	_, err := collection().InsertOne(ctx, doc)
+	if err != nil {
+		return nil, err
+	}
+
+	return &doc, nil
 }
 
 // Update updates existing document

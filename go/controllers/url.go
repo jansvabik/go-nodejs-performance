@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -32,7 +33,22 @@ func Redir(w http.ResponseWriter, r *http.Request) {
 
 // Create creates new document and saves it in database
 func Create(w http.ResponseWriter, r *http.Request) {
-	writeErrorResponse(w, "Not implemented yet", http.StatusInternalServerError)
+	// decode the URL body
+	var d data.URL
+	err := json.NewDecoder(r.Body).Decode(&d)
+	if err != nil {
+		http.Error(w, "Cannot decode your JSON. You should submit JSON like {\"target\": \"https://some.url/\"}.", http.StatusBadRequest)
+		return
+	}
+
+	// try to create the URL
+	doc, err := data.Create(d.Target)
+	if err != nil {
+		writeErrorResponse(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	writeOkResponse(w, "URL was shortened.", doc)
 }
 
 // Update updates the target of specified document in database
