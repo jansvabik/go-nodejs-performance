@@ -107,8 +107,36 @@ func Create(target string) (*URL, error) {
 }
 
 // Update updates existing document
-func Update() {
+func Update(urlID string, target string, password string) (*URL, error) {
+	// create timeout context
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 
+	// query options
+	after := options.After
+	opts := options.FindOneAndUpdateOptions{
+		ReturnDocument: &after,
+		Projection: bson.M{
+			"_id": 0,
+		},
+	}
+
+	// try to store the document in db
+	var result URL
+	err := collection().FindOneAndUpdate(ctx, bson.M{
+		"url":      urlID,
+		"password": password,
+	}, bson.M{
+		"$set": bson.M{
+			"target":   target,
+			"modified": time.Now(),
+		},
+	}, &opts).Decode(&result)
+	if err != nil {
+		return nil, err
+	}
+
+	return &result, nil
 }
 
 // Delete deletes specified document permanently

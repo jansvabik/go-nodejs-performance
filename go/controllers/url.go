@@ -53,7 +53,28 @@ func Create(w http.ResponseWriter, r *http.Request) {
 
 // Update updates the target of specified document in database
 func Update(w http.ResponseWriter, r *http.Request) {
-	writeErrorResponse(w, "Not implemented yet", http.StatusInternalServerError)
+	URLID := mux.Vars(r)["url"]
+
+	// decode the URL body
+	var d data.URL
+	err := json.NewDecoder(r.Body).Decode(&d)
+	if err != nil {
+		http.Error(w, "Cannot decode your JSON. You should submit JSON like {\"target\": \"https://some.url/\", \"password\": \"YourSecretPasswordFromCreation\"}.", http.StatusBadRequest)
+		return
+	}
+
+	// try to delete the URL
+	doc, err := data.Update(URLID, d.Target, d.Password)
+	if err != nil {
+		if err.Error() == "mongo: no documents in result" {
+			writeErrorResponse(w, "The password you entered is not valid.", http.StatusInternalServerError)
+		} else {
+			writeErrorResponse(w, err.Error(), http.StatusInternalServerError)
+		}
+		return
+	}
+
+	writeOkResponse(w, "The target of the URL was updated successfully.", doc)
 }
 
 // Delete deletes the specified document from database
