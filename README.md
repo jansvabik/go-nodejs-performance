@@ -8,20 +8,27 @@ In my tests all participants were located in Czech Republic (client and server).
 
 ### Localhost on macOS
 
-#### GET /
+#### GET / (few records)
 
 | # | Lang    | Requests | Average time   |
 |---|---------|----------|----------------|
 | 1 | Node.js | 10000    | ~17.1979748 ms |
 | 2 | Go      | 10000    | ~18.3700849 ms |
 
+#### GET / (20k records at once)
+
+| # | Lang    | Requests | Average time    |
+|---|---------|----------|-----------------|
+| 1 | Go      | 10000    | ~134.1045839 ms |
+| 2 | Node.js | 10000    | ~385.3674946 ms |
+
 
 #### POST /
 
 | # | Lang    | Requests | Average time   |
 |---|---------|----------|----------------|
-| 1 | Go      | 10000    | ~16.8654061 ms |
-| 2 | Node.js | 10000    | ~18.6725748 ms |
+| 1 | Go      | 10000    | ~16.5671425 ms |
+| 2 | Node.js | 10000    | ~17.1951589 ms |
 
 #### DELETE /{url}/
 
