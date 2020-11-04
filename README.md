@@ -20,8 +20,8 @@ In my tests all participants were located in Czech Republic (client and server).
 
 | # | Lang    | Requests | Average time   |
 |---|---------|----------|----------------|
-| 1 | Go      | 1000     | ~16.2108910 ms |
-| 2 | Node.js | 1000     | ~18.5389170 ms |
+| 1 | Go      | 10000    | ~16.8654061 ms |
+| 2 | Node.js | 10000    | ~18.6725748 ms |
 
 #### DELETE /{url}/
 
