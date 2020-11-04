@@ -105,8 +105,18 @@ func Update() {
 }
 
 // Delete deletes specified document permanently
-func Delete() {
+func Delete(urlID string) error {
+	// create timeout context
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
 
+	// try to remove the document from database
+	_, err := collection().DeleteOne(ctx, bson.M{"url": urlID})
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // collection returns the set connection

@@ -58,5 +58,14 @@ func Update(w http.ResponseWriter, r *http.Request) {
 
 // Delete deletes the specified document from database
 func Delete(w http.ResponseWriter, r *http.Request) {
-	writeErrorResponse(w, "Not implemented yet", http.StatusInternalServerError)
+	URLID := mux.Vars(r)["url"]
+
+	// try to delete the URL
+	err := data.Delete(URLID)
+	if err != nil {
+		writeErrorResponse(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	writeOkResponse(w, "Shortened URL was deleted.", nil)
 }
