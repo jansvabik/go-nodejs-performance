@@ -27,8 +27,8 @@ In my tests all participants were located in Czech Republic (client and server).
 
 | # | Lang    | Requests | Average time   |
 |---|---------|----------|----------------|
-| 1 | Go      | 1000     | ~16.7530640 ms |
-| 2 | Node.js | 1000     | ~18.6144160 ms |
+| 1 | Go      | 1000     | ~16.8426170 ms |
+| 2 | Node.js | 1000     | ~17.2534320 ms |
 
 ## Installation
 
