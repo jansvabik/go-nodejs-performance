@@ -27,7 +27,7 @@ func Redir(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	http.Redirect(w, r, URL.Target, http.StatusTemporaryRedirect)
+	http.Redirect(w, r, URL.Target, http.StatusPermanentRedirect)
 }
 
 // Create creates new document and saves it in database
